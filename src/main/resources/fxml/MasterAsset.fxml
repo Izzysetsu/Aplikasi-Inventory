@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="700.0" prefWidth="1000.0" spacing="20.0" style="-fx-background-color: #ecf0f1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.inventory.controller.MasterAssetController">
+    <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+
+    <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Manajemen Asset &amp; Inventory" />
+
+    <!-- FORM CARD -->
+    <VBox spacing="20.0" style="-fx-background-color: white; -fx-padding: 25; -fx-border-color: #e0e0e0; -fx-border-radius: 5; -fx-background-radius: 5;">
+        <GridPane hgap="30.0" vgap="15.0">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50.0" />
+                <ColumnConstraints percentWidth="50.0" />
+            </columnConstraints>
+            <children>
+                <VBox spacing="8.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <Label text="Barcode / Kode Barang" />
+                    <TextField fx:id="txtBarcode" prefHeight="35.0" promptText="Scan atau Input Kode" />
+                </VBox>
+                <VBox spacing="8.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <Label text="Nama Barang" />
+                    <TextField fx:id="txtName" prefHeight="35.0" promptText="Contoh: Laptop Thinkpad X1" />
+                </VBox>
+                <VBox spacing="8.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <Label text="Kategori" />
+                    <ComboBox fx:id="cbCategory" prefHeight="35.0" prefWidth="Infinity" promptText="Pilih Kategori" />
+                </VBox>
+                <VBox spacing="8.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Label text="Status Asset" />
+                    <ComboBox fx:id="cbStatus" prefHeight="35.0" prefWidth="Infinity" promptText="Pilih Status" />
+                </VBox>
+                <VBox spacing="8.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                    <Label text="Spesifikasi (Detail)" />
+                    <TextArea fx:id="txtSpec" prefHeight="80.0" promptText="Input Spesifikasi Lengkap (RAM, CPU, SN, dll)" />
+                </VBox>
+            </children>
+        </GridPane>
+
+        <HBox alignment="CENTER_RIGHT" spacing="15.0">
+            <Button fx:id="btnSave" onAction="#handleSave" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold;" text="Simpan" />
+            <Button onAction="#handleClear" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #95a5a6; -fx-text-fill: white;" text="Batal" />
+        </HBox>
+    </VBox>
+
+    <!-- TABLE CARD -->
+    <VBox VBox.vgrow="ALWAYS" style="-fx-background-color: white; -fx-padding: 15; -fx-border-color: #e0e0e0; -fx-border-radius: 5;">
+        <TableView fx:id="tableAsset" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colBarcode" prefWidth="120.0" text="Barcode" />
+                <TableColumn fx:id="colName" prefWidth="200.0" text="Nama Barang" />
+                <TableColumn fx:id="colCategory" prefWidth="150.0" text="Kategori" />
+                <TableColumn fx:id="colStatus" prefWidth="120.0" text="Status" />
+                <TableColumn fx:id="colSpec" prefWidth="300.0" text="Spesifikasi" />
+            </columns>
+        </TableView>
+    </VBox>
+</VBox>

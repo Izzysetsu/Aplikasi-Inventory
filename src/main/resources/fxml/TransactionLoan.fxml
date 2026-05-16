@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="700.0" prefWidth="900.0" spacing="20.0" style="-fx-background-color: #ecf0f1;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.inventory.controller.TransactionLoanController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+    <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Transaksi Peminjaman Asset" />
+
+    <!-- CARD FORM PEMINJAMAN -->
+    <VBox spacing="20.0" style="-fx-background-color: white; -fx-padding: 25; -fx-border-color: #e0e0e0; -fx-border-radius: 5; -fx-background-radius: 5;">
+        <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #3498db;" text="Form Input Peminjaman" />
+        
+        <GridPane hgap="30.0" vgap="15.0">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50.0" />
+                <ColumnConstraints percentWidth="50.0" />
+            </columnConstraints>
+            <children>
+                <VBox spacing="8.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <Label text="Nama Peminjam (PIC)" />
+                    <TextField fx:id="txtPicName" prefHeight="35.0" promptText="Masukkan Nama PIC" />
+                </VBox>
+                <VBox spacing="8.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <Label text="Divisi" />
+                    <TextField fx:id="txtDivision" prefHeight="35.0" promptText="Contoh: IT, HRD, Finance" />
+                </VBox>
+                <VBox spacing="8.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <Label text="Asset yang Dipinjam" />
+                    <ComboBox fx:id="cbAsset" prefHeight="35.0" prefWidth="Infinity" promptText="Pilih Asset" />
+                </VBox>
+                <VBox spacing="8.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Label text="Lokasi Tujuan / Peminjaman" />
+                    <TextField fx:id="txtLocation" prefHeight="35.0" promptText="Contoh: HO, Site, dll" />
+                </VBox>
+                <VBox spacing="8.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                    <Label text="Tanggal Pinjam" />
+                    <DatePicker fx:id="dpLoanDate" prefHeight="35.0" prefWidth="Infinity" promptText="Pilih Tanggal" />
+                </VBox>
+                <VBox spacing="8.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <Label text="Tanggal Kembali (Estimasi)" />
+                    <DatePicker fx:id="dpReturnDate" prefHeight="35.0" prefWidth="Infinity" promptText="Pilih Tanggal" />
+                </VBox>
+                <VBox spacing="8.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                    <Label text="Keperluan" />
+                    <TextArea fx:id="txtPurpose" prefHeight="60.0" promptText="Jelaskan keperluan peminjaman..." />
+                </VBox>
+            </children>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+        </GridPane>
+
+        <HBox alignment="CENTER_RIGHT" spacing="15.0">
+            <Button onAction="#handleSave" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold;" text="Simpan" />
+            <Button onAction="#handleClear" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #95a5a6; -fx-text-fill: white;" text="Batal" />
+        </HBox>
+    </VBox>
+   
+</VBox>

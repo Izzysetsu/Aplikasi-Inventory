@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="700.0" prefWidth="900.0" spacing="20.0" style="-fx-background-color: #ecf0f1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.inventory.controller.ReportLoanController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+    <HBox alignment="CENTER_LEFT" spacing="20.0">
+        <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Laporan Peminjaman Asset" />
+        <Region HBox.hgrow="ALWAYS" />
+        <TextField fx:id="txtSearch" prefHeight="35.0" prefWidth="250.0" promptText="🔍 Cari Nama / Divisi / Asset..." />
+    </HBox>
+
+    <!-- CARD TABEL -->
+    <VBox VBox.vgrow="ALWAYS" style="-fx-background-color: white; -fx-padding: 15; -fx-border-color: #e0e0e0; -fx-border-radius: 5;">
+        <TableView fx:id="tableLoan" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colPic" prefWidth="150.0" text="Nama PIC" />
+                <TableColumn fx:id="colDiv" prefWidth="100.0" text="Divisi" />
+                <TableColumn fx:id="colAsset" prefWidth="200.0" text="Asset (Barcode)" />
+                <TableColumn fx:id="colLoc" prefWidth="120.0" text="Lokasi" />
+                <TableColumn fx:id="colLoanDate" prefWidth="120.0" text="Tgl Pinjam" />
+                <TableColumn fx:id="colReturnDate" prefWidth="120.0" text="Tgl Kembali" />
+                <TableColumn fx:id="colStatus" prefWidth="100.0" text="Status" />
+            </columns>
+        </TableView>
+        
+        <HBox alignment="CENTER_RIGHT" spacing="15.0" style="-fx-padding: 15 0 0 0;">
+            <Button onAction="#handleExport" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" text="📥 Export Excel" />
+        </HBox>
+    </VBox>
+</VBox>
