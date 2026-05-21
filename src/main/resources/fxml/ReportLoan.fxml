@@ -20,8 +20,8 @@
         <ComboBox fx:id="cbStatus" prefHeight="35.0" prefWidth="120.0" promptText="Status" />
         <DatePicker fx:id="dpStartDate" prefHeight="35.0" prefWidth="130.0" promptText="Tgl Awal" />
         <DatePicker fx:id="dpEndDate" prefHeight="35.0" prefWidth="130.0" promptText="Tgl Akhir" />
-        <Button onAction="#handleFilter" prefHeight="35.0" style="-fx-background-color: #3498db; -fx-text-fill: white;" text="Terapkan" />
-        <Button onAction="#handleResetFilter" prefHeight="35.0" style="-fx-background-color: #95a5a6; -fx-text-fill: white;" text="Reset" />
+        <Button onAction="#handleFilter" prefHeight="35.0" style="-fx-background-color: #5d87ff; -fx-text-fill: white;" text="Terapkan" />
+        <Button onAction="#handleResetFilter" prefHeight="35.0" style="-fx-background-color: #8c98a4; -fx-text-fill: white;" text="Reset" />
     </HBox>
 
     <!-- CARD TABEL -->
@@ -40,7 +40,7 @@
         </TableView>
         
         <HBox alignment="CENTER_RIGHT" spacing="15.0" style="-fx-padding: 15 0 0 0;">
-            <Button onAction="#handleExport" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" text="📥 Export Excel" />
+            <Button onAction="#handleExport" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold;" text="📥 Export Excel" />
         </HBox>
     </VBox>
 </VBox>

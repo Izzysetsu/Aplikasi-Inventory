@@ -66,10 +66,10 @@
         </GridPane>
 
         <HBox alignment="CENTER_RIGHT" spacing="15.0">
-            <Button fx:id="btnSave" onAction="#handleSave" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Simpan" />
-            <Button fx:id="btnUpdate" disable="true" onAction="#handleUpdate" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Ubah" />
+            <Button fx:id="btnSave" onAction="#handleSave" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #5d87ff; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Simpan" />
+            <Button fx:id="btnUpdate" disable="true" onAction="#handleUpdate" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Ubah" />
             <Button fx:id="btnDelete" disable="true" onAction="#handleDelete" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Hapus" />
-            <Button onAction="#handleClear" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Batal" />
+            <Button onAction="#handleClear" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #8c98a4; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Batal" />
         </HBox>
     </VBox>
 

@@ -21,7 +21,7 @@
             <HBox alignment="CENTER_LEFT" spacing="10.0">
                 <Label style="-fx-font-weight: bold; -fx-text-fill: #7f8c8d;" text="Pencarian:" />
                 <TextField fx:id="txtSearch" prefHeight="30.0" prefWidth="250.0" promptText="Ketik nama atau kategori..." style="-fx-background-radius: 15;" />
-                <Button onAction="#handleRefresh" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-cursor: hand;" text="Refresh Data" />
+                <Button onAction="#handleRefresh" style="-fx-background-color: #5d87ff; -fx-text-fill: white; -fx-cursor: hand;" text="Refresh Data" />
             </HBox>
             
             <TableView fx:id="tableStock" VBox.vgrow="ALWAYS">
@@ -53,7 +53,7 @@
             <VBox spacing="5.0">
                 <Label text="Qty Fisik (Aktual):" style="-fx-font-weight: bold;" />
                 <TextField fx:id="txtQtyPhysical" prefHeight="35.0" promptText="Masukkan Qty Aktual" disable="true" />
-                <Label style="-fx-font-size: 11px; -fx-text-fill: #95a5a6;" text="*Masukkan jumlah fisik sebenarnya saat ini." wrapText="true" />
+                <Label style="-fx-font-size: 11px; -fx-text-fill: #8c98a4;" text="*Masukkan jumlah fisik sebenarnya saat ini." wrapText="true" />
             </VBox>
 
             <Button fx:id="btnAdjust" disable="true" maxWidth="Infinity" onAction="#handleAdjust" prefHeight="40.0" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Sesuaikan Stok" />

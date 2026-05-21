@@ -21,8 +21,8 @@
         <Label text="-" />
         <DatePicker fx:id="dpEndDate" prefHeight="35.0" prefWidth="130.0" promptText="Tgl Akhir" />
         
-        <Button onAction="#handleFilter" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Cari" />
-        <Button onAction="#handleReset" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Reset" />
+        <Button onAction="#handleFilter" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #5d87ff; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Cari" />
+        <Button onAction="#handleReset" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #8c98a4; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Reset" />
     </HBox>
 
     <VBox VBox.vgrow="ALWAYS" style="-fx-background-color: white; -fx-padding: 15; -fx-border-color: #e0e0e0; -fx-border-radius: 5;" spacing="10.0">
@@ -38,7 +38,7 @@
             </columns>
         </TableView>
         <HBox alignment="CENTER_RIGHT" spacing="10.0" style="-fx-padding: 10 0 0 0;">
-            <Button onAction="#handleExportExcel" prefHeight="40.0" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="📥 Export Excel" />
+            <Button onAction="#handleExportExcel" prefHeight="40.0" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="📥 Export Excel" />
         </HBox>
     </VBox>
 </VBox>

@@ -12,7 +12,7 @@
 
     <!-- FORM INPUT (ATAS) -->
     <VBox spacing="20.0" style="-fx-background-color: white; -fx-padding: 25; -fx-border-color: #e0e0e0; -fx-border-radius: 5; -fx-background-radius: 5;">
-        <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #3498db;" text="Form Data Pengajuan Barang" />
+        <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #5d87ff;" text="Form Data Pengajuan Barang" />
         
         <GridPane hgap="30.0" vgap="15.0">
             <columnConstraints>
@@ -54,15 +54,15 @@
         </GridPane>
         
         <HBox alignment="CENTER_RIGHT" spacing="15.0">
-            <Button onAction="#initialize" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Batal" />
-            <Button fx:id="btnSubmit" disable="true" onAction="#handleSubmit" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Proses Request" />
+            <Button onAction="#initialize" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #8c98a4; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Batal" />
+            <Button fx:id="btnSubmit" disable="true" onAction="#handleSubmit" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #5d87ff; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Proses Request" />
         </HBox>
     </VBox>
 
     <!-- TABEL BARANG (BAWAH) -->
     <VBox spacing="15.0" style="-fx-background-color: white; -fx-padding: 25; -fx-border-color: #e0e0e0; -fx-border-radius: 5; -fx-background-radius: 5;" VBox.vgrow="ALWAYS">
         <HBox alignment="CENTER_LEFT" spacing="10.0">
-            <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #3498db;" text="Pilih Barang dari Daftar:" />
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #5d87ff;" text="Pilih Barang dari Daftar:" />
             <Region HBox.hgrow="ALWAYS" />
             <TextField fx:id="txtSearch" prefHeight="35.0" prefWidth="250.0" promptText="🔍 Cari nama barang atau barcode..." style="-fx-background-radius: 15;" />
             <Button onAction="#handleRefresh" prefHeight="35.0" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="🔄 Refresh" />

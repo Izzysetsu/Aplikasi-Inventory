@@ -5,6 +5,7 @@ import com.inventory.dao.RoomDAO;
 import com.inventory.model.Room;
 import com.inventory.model.RoomBooking;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -16,52 +17,38 @@ import java.util.List;
 public class RequestRoomController {
 
     @FXML private ComboBox<Room> cbRoom;
-    @FXML private DatePicker dpDate;
-    @FXML private ComboBox<String> cbStartTime;
-    @FXML private ComboBox<String> cbEndTime;
-    @FXML private TextField txtPic, txtDivision, txtPosition, txtParticipants;
+    @FXML private DatePicker dpDate, dpEndDate;
+    @FXML private ComboBox<String> cbStartTime, cbEndTime;
+    @FXML private TextField txtPic, txtDivision;
     @FXML private TextArea txtPurpose;
     
-    @FXML private TableView<RoomBooking> tableBooking;
-    @FXML private TableColumn<RoomBooking, String> colRoom, colTime, colPic, colPurpose, colStatus;
-
     private RoomDAO roomDao = new RoomDAO();
     private RoomBookingDAO bookingDao = new RoomBookingDAO();
 
     @FXML
     public void initialize() {
-        if (tableBooking != null) {
-            tableBooking.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        // Generate times
+        ObservableList<String> times = FXCollections.observableArrayList();
+        for (int h = 7; h <= 21; h++) {
+            times.add(String.format("%02d:00", h));
+            times.add(String.format("%02d:30", h));
         }
-
-        colRoom.setCellValueFactory(new PropertyValueFactory<>("roomName"));
-        colTime.setCellValueFactory(new PropertyValueFactory<>("startTime")); 
-        colPic.setCellValueFactory(new PropertyValueFactory<>("picName"));
-        colPurpose.setCellValueFactory(new PropertyValueFactory<>("purpose"));
-        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
-
+        cbStartTime.setItems(times);
+        cbEndTime.setItems(times);
+        
+        // Sync dpEndDate with dpDate since booking is max 1 day
+        dpDate.valueProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal != null) {
+                dpEndDate.setValue(newVal);
+            }
+        });
+        
         loadRooms();
-        loadTimeOptions();
-        loadData();
     }
 
     private void loadRooms() {
         List<Room> rooms = roomDao.getAll();
         cbRoom.setItems(FXCollections.observableArrayList(rooms));
-    }
-
-    private void loadTimeOptions() {
-        List<String> times = new ArrayList<>();
-        for (int h = 7; h <= 21; h++) {
-            times.add(String.format("%02d:00", h));
-            times.add(String.format("%02d:30", h));
-        }
-        cbStartTime.setItems(FXCollections.observableArrayList(times));
-        cbEndTime.setItems(FXCollections.observableArrayList(times));
-    }
-
-    private void loadData() {
-        tableBooking.setItems(FXCollections.observableArrayList(bookingDao.getAll()));
     }
 
     @FXML
@@ -79,8 +66,8 @@ public class RequestRoomController {
         booking.setEndTime(endDateTime);
         booking.setPicName(txtPic.getText());
         booking.setDivision(txtDivision.getText() != null ? txtDivision.getText() : "");
-        booking.setPosition(txtPosition.getText() != null ? txtPosition.getText() : "");
-        booking.setParticipants(Integer.parseInt(txtParticipants.getText()));
+        booking.setPosition(""); // Default empty string since field removed
+        booking.setParticipants(0); // Default 0 since field removed
         booking.setPurpose(txtPurpose.getText() != null ? txtPurpose.getText() : "");
         booking.setStatus("Approved");
 
@@ -98,14 +85,12 @@ public class RequestRoomController {
     private void handleClear() {
         cbRoom.getSelectionModel().clearSelection();
         dpDate.setValue(null);
+        dpEndDate.setValue(null);
         cbStartTime.getSelectionModel().clearSelection();
         cbEndTime.getSelectionModel().clearSelection();
         txtPic.clear();
         txtDivision.clear();
-        txtPosition.clear();
-        txtParticipants.clear();
         txtPurpose.clear();
-        loadData();
     }
 
     private boolean validateInput() {
@@ -115,15 +100,7 @@ public class RequestRoomController {
         if (cbStartTime.getValue() == null) errorMsg += "- Jam Mulai harus dipilih\n";
         if (cbEndTime.getValue() == null) errorMsg += "- Jam Selesai harus dipilih\n";
         if (txtPic.getText() == null || txtPic.getText().trim().isEmpty()) errorMsg += "- Nama Peminjam wajib diisi\n";
-        if (txtParticipants.getText() == null || txtParticipants.getText().trim().isEmpty()) {
-            errorMsg += "- Jumlah Peserta wajib diisi\n";
-        } else {
-            try {
-                Integer.parseInt(txtParticipants.getText());
-            } catch (NumberFormatException e) {
-                errorMsg += "- Jumlah Peserta harus berupa angka\n";
-            }
-        }
+        if (txtDivision.getText() == null || txtDivision.getText().trim().isEmpty()) errorMsg += "- Divisi wajib diisi\n";
         
         if (cbStartTime.getValue() != null && cbEndTime.getValue() != null) {
             LocalTime start = LocalTime.parse(cbStartTime.getValue());

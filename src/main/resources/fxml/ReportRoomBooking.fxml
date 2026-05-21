@@ -17,8 +17,9 @@
         <HBox alignment="CENTER_LEFT" spacing="15.0">
             <Label text="Filter Status:" />
             <ComboBox fx:id="cbStatusFilter" prefWidth="150.0" promptText="Semua Status" />
-            <Button onAction="#handleFilter" text="Terapkan Filter" />
+            <Button onAction="#handleFilter" prefHeight="35.0" style="-fx-background-color: #5d87ff; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Terapkan Filter" />
             <Region HBox.hgrow="ALWAYS" />
+            <Button onAction="#handleExportExcel" prefHeight="35.0" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="📥 Export Excel" />
         </HBox>
         
         <TableView fx:id="tableBooking" VBox.vgrow="ALWAYS">
@@ -27,9 +28,7 @@
                 <TableColumn fx:id="colStartTime" prefWidth="130.0" text="Mulai" />
                 <TableColumn fx:id="colEndTime" prefWidth="130.0" text="Selesai" />
                 <TableColumn fx:id="colPic" prefWidth="120.0" text="Peminjam" />
-                <TableColumn fx:id="colDivision" prefWidth="100.0" text="Divisi" />
-                <TableColumn fx:id="colPosition" prefWidth="100.0" text="Jabatan" />
-                <TableColumn fx:id="colParticipants" prefWidth="80.0" text="Peserta" />
+                <TableColumn fx:id="colDivision" prefWidth="150.0" text="Divisi" />
                 <TableColumn fx:id="colPurpose" prefWidth="150.0" text="Keperluan" />
                 <TableColumn fx:id="colStatus" prefWidth="100.0" text="Status" />
             </columns>
