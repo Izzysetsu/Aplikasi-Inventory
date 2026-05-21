@@ -11,6 +11,8 @@ public class Loan {
     private String returnDate;
     private String purpose;        
     private String status;
+    private int quantity;
+    private String categoryType;
 
     // ----- GETTER & SETTER -----
     public int getId() { return id; }
@@ -42,4 +44,10 @@ public class Loan {
     
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+
+    public int getQuantity() { return quantity; }
+    public void setQuantity(int quantity) { this.quantity = quantity; }
+    
+    public String getCategoryType() { return categoryType; }
+    public void setCategoryType(String categoryType) { this.categoryType = categoryType; }
 }

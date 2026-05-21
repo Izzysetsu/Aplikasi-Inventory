@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 
 <VBox prefHeight="700.0" prefWidth="900.0" spacing="20.0" style="-fx-background-color: #ecf0f1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.inventory.controller.MasterCategoryController">
     <padding>
@@ -23,29 +30,29 @@
             <children>
                 <VBox spacing="8.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
                     <Label style="-fx-text-fill: #7f8c8d;" text="Nama Kategori" />
-                    <TextField fx:id="txtCategoryName" prefHeight="35.0" promptText="Masukkan Nama Kategori" />
+                    <TextField fx:id="txtCategoryName" prefHeight="35.0" promptText="Masukkan Nama Kategori (e.g. Printer, ATK)" />
                 </VBox>
                 <VBox spacing="8.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                    <Label style="-fx-text-fill: #7f8c8d;" text="Status" />
-                    <ComboBox fx:id="cbStatus" prefHeight="35.0" prefWidth="Infinity" promptText="Pilih Status" />
+                    <Label style="-fx-text-fill: #7f8c8d;" text="Tipe Barang (Aset / ATK)" />
+                    <ComboBox fx:id="cbType" prefHeight="35.0" prefWidth="Infinity" promptText="Pilih Tipe" />
                 </VBox>
             </children>
         </GridPane>
 
         <HBox alignment="CENTER_RIGHT" spacing="15.0">
-            <Button fx:id="btnSave" onAction="#handleSave" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 4; -fx-cursor: hand;" text="Simpan" />
-            <Button fx:id="btnUpdate" disable="true" onAction="#handleUpdate" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 4; -fx-cursor: hand;" text="Ubah" />
-            <Button fx:id="btnDelete" disable="true" onAction="#handleDelete" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 4; -fx-cursor: hand;" text="Hapus" />
-            <Button onAction="#handleClear" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 4; -fx-cursor: hand;" text="Batal" />
+            <Button fx:id="btnSave" onAction="#handleSave" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Simpan" />
+            <Button fx:id="btnUpdate" disable="true" onAction="#handleUpdate" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Ubah" />
+            <Button fx:id="btnDelete" disable="true" onAction="#handleDelete" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Hapus" />
+            <Button onAction="#handleClear" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Batal" />
         </HBox>
     </VBox>
 
     <VBox VBox.vgrow="ALWAYS" style="-fx-background-color: white; -fx-padding: 15; -fx-border-color: #e0e0e0; -fx-border-radius: 5; -fx-background-radius: 5;">
         <TableView fx:id="tableCategory" VBox.vgrow="ALWAYS">
             <columns>
-                <TableColumn fx:id="colId" prefWidth="80.0" text="ID" />
+                <TableColumn fx:id="colId" prefWidth="100.0" text="ID Kategori" />
                 <TableColumn fx:id="colName" prefWidth="400.0" text="Nama Kategori" />
-                <TableColumn fx:id="colStatus" prefWidth="150.0" text="Status" />
+                <TableColumn fx:id="colType" prefWidth="350.0" text="Tipe Barang" />
             </columns>
         </TableView>
     </VBox>

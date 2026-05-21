@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="700.0" prefWidth="900.0" spacing="20.0" style="-fx-background-color: #ecf0f1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.inventory.controller.RequestBarangController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+    <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Request Barang (Peminjaman / Pengambilan)" />
+
+    <!-- FORM INPUT (ATAS) -->
+    <VBox spacing="20.0" style="-fx-background-color: white; -fx-padding: 25; -fx-border-color: #e0e0e0; -fx-border-radius: 5; -fx-background-radius: 5;">
+        <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #3498db;" text="Form Data Pengajuan Barang" />
+        
+        <GridPane hgap="30.0" vgap="15.0">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="33.3" />
+                <ColumnConstraints percentWidth="33.3" />
+                <ColumnConstraints percentWidth="33.4" />
+            </columnConstraints>
+            <children>
+                <VBox spacing="8.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <Label style="-fx-text-fill: #7f8c8d;" text="Nama Peminjam / PIC" />
+                    <TextField fx:id="txtPicName" prefHeight="35.0" promptText="Masukkan Nama" />
+                </VBox>
+                
+                <VBox spacing="8.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <Label style="-fx-text-fill: #7f8c8d;" text="Divisi" />
+                    <TextField fx:id="txtDivision" prefHeight="35.0" promptText="Masukkan Divisi" />
+                </VBox>
+                
+                <VBox spacing="8.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                    <Label style="-fx-text-fill: #7f8c8d;" text="Tanggal Pinjam / Ambil" />
+                    <DatePicker fx:id="dpLoanDate" prefHeight="35.0" prefWidth="Infinity" />
+                </VBox>
+                
+                <VBox spacing="8.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <Label style="-fx-text-fill: #7f8c8d;" text="Keperluan" />
+                    <TextField fx:id="txtPurpose" prefHeight="35.0" promptText="Deskripsi singkat keperluan" />
+                </VBox>
+                
+                <VBox spacing="8.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Label style="-fx-text-fill: #7f8c8d;" text="Barang Terpilih" />
+                    <TextField fx:id="txtSelectedAsset" prefHeight="35.0" disable="true" promptText="Pilih dari tabel di bawah" style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+                </VBox>
+                
+                <VBox spacing="8.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                    <Label style="-fx-text-fill: #7f8c8d;" text="Jumlah (Qty)" />
+                    <TextField fx:id="txtQty" prefHeight="35.0" disable="true" promptText="Pilih barang terlebih dahulu" />
+                </VBox>
+            </children>
+        </GridPane>
+        
+        <HBox alignment="CENTER_RIGHT" spacing="15.0">
+            <Button onAction="#initialize" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Batal" />
+            <Button fx:id="btnSubmit" disable="true" onAction="#handleSubmit" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Proses Request" />
+        </HBox>
+    </VBox>
+
+    <!-- TABEL BARANG (BAWAH) -->
+    <VBox spacing="15.0" style="-fx-background-color: white; -fx-padding: 25; -fx-border-color: #e0e0e0; -fx-border-radius: 5; -fx-background-radius: 5;" VBox.vgrow="ALWAYS">
+        <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #3498db;" text="Pilih Barang dari Daftar:" />
+            <Region HBox.hgrow="ALWAYS" />
+            <TextField fx:id="txtSearch" prefHeight="35.0" prefWidth="250.0" promptText="🔍 Cari nama barang atau barcode..." style="-fx-background-radius: 15;" />
+            <Button onAction="#handleRefresh" prefHeight="35.0" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="🔄 Refresh" />
+        </HBox>
+        
+        <TableView fx:id="tableAsset" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colBarcode" prefWidth="120.0" text="Barcode" />
+                <TableColumn fx:id="colName" prefWidth="250.0" text="Nama Barang" />
+                <TableColumn fx:id="colCategory" prefWidth="150.0" text="Kategori" />
+                <TableColumn fx:id="colStatus" prefWidth="100.0" text="Status" />
+                <TableColumn fx:id="colQty" prefWidth="100.0" text="Stok Tersedia" />
+            </columns>
+        </TableView>
+        <Label style="-fx-font-size: 12px; -fx-text-fill: #e74c3c; -fx-font-weight: bold;" text="*Hanya menampilkan barang dengan stok &gt; 0 dan status Tersedia/Baik." />
+    </VBox>
+
+</VBox>

@@ -10,9 +10,18 @@
     </padding>
 
     <HBox alignment="CENTER_LEFT" spacing="20.0">
-        <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Laporan Peminjaman Asset" />
-        <Region HBox.hgrow="ALWAYS" />
-        <TextField fx:id="txtSearch" prefHeight="35.0" prefWidth="250.0" promptText="🔍 Cari Nama / Divisi / Asset..." />
+        <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Laporan Peminjaman" />
+    </HBox>
+
+    <HBox spacing="15.0" style="-fx-background-color: white; -fx-padding: 15; -fx-border-color: #e0e0e0; -fx-border-radius: 5; -fx-alignment: center-left;">
+        <Label text="Filter:" style="-fx-font-weight: bold;" />
+        <TextField fx:id="txtSearch" prefHeight="35.0" prefWidth="200.0" promptText="🔍 Cari Nama/PIC/Barang..." />
+        <ComboBox fx:id="cbCategory" prefHeight="35.0" prefWidth="120.0" promptText="Jenis" />
+        <ComboBox fx:id="cbStatus" prefHeight="35.0" prefWidth="120.0" promptText="Status" />
+        <DatePicker fx:id="dpStartDate" prefHeight="35.0" prefWidth="130.0" promptText="Tgl Awal" />
+        <DatePicker fx:id="dpEndDate" prefHeight="35.0" prefWidth="130.0" promptText="Tgl Akhir" />
+        <Button onAction="#handleFilter" prefHeight="35.0" style="-fx-background-color: #3498db; -fx-text-fill: white;" text="Terapkan" />
+        <Button onAction="#handleResetFilter" prefHeight="35.0" style="-fx-background-color: #95a5a6; -fx-text-fill: white;" text="Reset" />
     </HBox>
 
     <!-- CARD TABEL -->
@@ -22,10 +31,11 @@
                 <TableColumn fx:id="colPic" prefWidth="150.0" text="Nama PIC" />
                 <TableColumn fx:id="colDiv" prefWidth="100.0" text="Divisi" />
                 <TableColumn fx:id="colAsset" prefWidth="200.0" text="Asset (Barcode)" />
-                <TableColumn fx:id="colLoc" prefWidth="120.0" text="Lokasi" />
-                <TableColumn fx:id="colLoanDate" prefWidth="120.0" text="Tgl Pinjam" />
-                <TableColumn fx:id="colReturnDate" prefWidth="120.0" text="Tgl Kembali" />
-                <TableColumn fx:id="colStatus" prefWidth="100.0" text="Status" />
+                <TableColumn fx:id="colLoc" prefWidth="100.0" text="Lokasi" />
+                <TableColumn fx:id="colQty" prefWidth="70.0" text="Qty" />
+                <TableColumn fx:id="colLoanDate" prefWidth="100.0" text="Tgl Pinjam" />
+                <TableColumn fx:id="colReturnDate" prefWidth="100.0" text="Tgl Kembali" />
+                <TableColumn fx:id="colStatus" prefWidth="90.0" text="Status" />
             </columns>
         </TableView>
         

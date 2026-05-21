@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="700.0" prefWidth="900.0" spacing="20.0" style="-fx-background-color: #f4f6f9;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.inventory.controller.ListRoomBookingController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+    <HBox alignment="CENTER_LEFT" spacing="20.0">
+        <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Daftar Peminjaman Ruangan Aktif" />
+    </HBox>
+
+    <VBox VBox.vgrow="ALWAYS" style="-fx-background-color: white; -fx-padding: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0); -fx-background-radius: 5;" spacing="15.0">
+        <HBox alignment="CENTER_LEFT" spacing="15.0">
+            <Label style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;" text="Booking yang masih berstatus Approved:" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button onAction="#handleCompleteBooking" prefHeight="35.0" styleClass="btn-primary" text="Tandai Selesai" />
+        </HBox>
+        
+        <TableView fx:id="tableBooking" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colPic" prefWidth="150.0" text="Nama Peminjam" />
+                <TableColumn fx:id="colDivision" prefWidth="120.0" text="Divisi" />
+                <TableColumn fx:id="colPosition" prefWidth="120.0" text="Jabatan" />
+                <TableColumn fx:id="colRoom" prefWidth="150.0" text="Ruangan" />
+                <TableColumn fx:id="colStartTime" prefWidth="140.0" text="Dari (Mulai)" />
+                <TableColumn fx:id="colEndTime" prefWidth="140.0" text="Sampai (Selesai)" />
+                <TableColumn fx:id="colPurpose" prefWidth="250.0" text="Keperluan" />
+            </columns>
+        </TableView>
+    </VBox>
+</VBox>

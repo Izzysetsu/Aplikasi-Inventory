@@ -28,7 +28,7 @@ public class SupplierDAO {
         }
     }
 
-    // 2. Soft Delete
+    // 2. Soft Delete (Mengubah status menjadi deleted)
     public boolean delete(int id) {
         String sql = "UPDATE suppliers SET is_deleted = 1 WHERE supplier_id = ?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -42,7 +42,7 @@ public class SupplierDAO {
 
     // 3. Tampil Semua Data
     public List<Supplier> getAll() {
-        return search(""); // Pakai fungsi search dengan keyword kosong
+        return search(""); // Tetap menggunakan keyword kosong untuk mengambil semua data
     }
 
     // 4. Cari Berdasarkan Nama, Telepon, atau Email 
@@ -56,21 +56,23 @@ public class SupplierDAO {
             ps.setString(2, searchPattern);
             ps.setString(3, searchPattern);
             
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Supplier sup = new Supplier();
-                sup.setId(rs.getInt("supplier_id"));
-                sup.setName(rs.getString("name"));
-                sup.setPhone(rs.getString("phone"));
-                sup.setEmail(rs.getString("email"));
-                sup.setAddress(rs.getString("address"));
-                list.add(sup);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Supplier sup = new Supplier();
+                    sup.setId(rs.getInt("supplier_id"));
+                    sup.setName(rs.getString("name"));
+                    sup.setPhone(rs.getString("phone"));
+                    sup.setEmail(rs.getString("email"));
+                    sup.setAddress(rs.getString("address"));
+                    list.add(sup);
+                }
             }
         } catch (SQLException e) {
             System.err.println("Error Search Supplier: " + e.getMessage());
         }
         return list;
     }
+
     // 5. Update Data
     public boolean update(Supplier sup) {
         String sql = "UPDATE suppliers SET name=?, phone=?, email=?, address=? WHERE supplier_id=?";

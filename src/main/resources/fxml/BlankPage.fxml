@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="700.0" prefWidth="900.0" spacing="20.0" style="-fx-background-color: #ecf0f1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.inventory.controller.BlankPageController">
+    
+    <Label style="-fx-font-size: 80px; -fx-text-fill: #bdc3c7;" text="🚧" />
+    
+    <Label fx:id="lblTitle" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Fitur Belum Tersedia" />
+    
+    <Label style="-fx-font-size: 16px; -fx-text-fill: #7f8c8d;" text="Halaman ini masih dalam tahap pengembangan." />
+    
+</VBox>

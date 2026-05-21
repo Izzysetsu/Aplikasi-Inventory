@@ -13,21 +13,24 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         
-     
-        URL fxmlLocation = getClass().getResource("/fxml/MainDashboard.fxml");
+        URL fxmlLocation = getClass().getResource("/fxml/Login.fxml");
         
         if (fxmlLocation == null) {
-            System.err.println("ERROR: File MainDashboard.fxml tidak ditemukan di folder resources/fxml!");
+            System.err.println("ERROR: File Login.fxml tidak ditemukan di folder resources/fxml!");
             return;
         }
 
         Parent root = FXMLLoader.load(fxmlLocation);
         
-       
-        Scene scene = new Scene(root, 1100, 700);
+        Scene scene = new Scene(root);
         
-        stage.setTitle("Inventory IJI - Menu Utama");
+        stage.setTitle("Login - Inventory");
         stage.setScene(scene);
+        stage.setResizable(true); 
+        stage.setMinWidth(1050);
+        stage.setMinHeight(750);
+        
+        stage.centerOnScreen();
         stage.show();
     }
 

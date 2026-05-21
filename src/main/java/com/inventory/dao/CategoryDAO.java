@@ -13,16 +13,18 @@ public class CategoryDAO {
         this.conn = DBConnection.getConnection();
     }
 
-    // 1. Ambil Semua Data
+    // 1. Ambil Semua Data 
     public List<Category> getAll() {
         List<Category> list = new ArrayList<>();
         String sql = "SELECT * FROM categories WHERE is_deleted = 0 ORDER BY category_id DESC";
+        
         try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 Category cat = new Category();
-                cat.setId(rs.getInt("category_id"));
+                cat.setCategoryId(rs.getInt("category_id"));
                 cat.setName(rs.getString("name"));
-                cat.setStatus(rs.getString("status"));
+                cat.setType(rs.getString("type")); 
+                
                 list.add(cat);
             }
         } catch (SQLException e) {
@@ -33,10 +35,10 @@ public class CategoryDAO {
 
     // 2. Tambah Data
     public boolean insert(Category cat) {
-        String sql = "INSERT INTO categories (name, status) VALUES (?, ?)";
+        String sql = "INSERT INTO categories (name, type, is_deleted) VALUES (?, ?, 0)"; 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, cat.getName());
-            ps.setString(2, cat.getStatus());
+            ps.setString(2, cat.getType()); 
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             System.err.println("Error Insert Category: " + e.getMessage());
@@ -46,11 +48,11 @@ public class CategoryDAO {
 
     // 3. Update Data 
     public boolean update(Category cat) {
-        String sql = "UPDATE categories SET name = ?, status = ? WHERE category_id = ?";
+        String sql = "UPDATE categories SET name = ?, type = ? WHERE category_id = ?"; 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, cat.getName());
-            ps.setString(2, cat.getStatus());
-            ps.setInt(3, cat.getId());
+            ps.setString(2, cat.getType()); 
+            ps.setInt(3, cat.getCategoryId()); 
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             System.err.println("Error Update Category: " + e.getMessage());
@@ -58,7 +60,7 @@ public class CategoryDAO {
         }
     }
 
-    // 4. Hapus Data (Soft Delete)
+    // 4. Hapus Data (Soft Delete )
     public boolean delete(int id) {
         String sql = "UPDATE categories SET is_deleted = 1 WHERE category_id = ?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {

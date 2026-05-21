@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<StackPane prefHeight="700.0" prefWidth="1100.0" style="-fx-background-color: #e2e8f0;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.inventory.controller.LoginController">
+   <children>
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="320.0" spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);">
+         <padding>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+         </padding>
+         <children>
+            <Label text="LOGIN SISTEM" textFill="#1e3a8a">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label text="Inventory Management" textFill="#64748b">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="txtUsername" prefHeight="35.0" promptText="Username" style="-fx-background-radius: 4; -fx-border-color: #cbd5e1; -fx-border-radius: 4;" />
+            <PasswordField fx:id="txtPassword" prefHeight="35.0" promptText="Password" style="-fx-background-radius: 4; -fx-border-color: #cbd5e1; -fx-border-radius: 4;" />
+            <Label fx:id="lblError" text="Username atau Password salah!" textFill="#ef4444" visible="false" />
+            <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#handleLogin" prefHeight="40.0" prefWidth="240.0" style="-fx-background-color: #1e3a8a; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 4; -fx-cursor: hand;" text="LOGIN">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</StackPane>

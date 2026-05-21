@@ -8,13 +8,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class MasterCategoryController {
-
     @FXML private TextField txtCategoryName;
-    @FXML private ComboBox<String> cbStatus;
+    @FXML private ComboBox<String> cbType; 
     @FXML private TableView<Category> tableCategory;
     @FXML private TableColumn<Category, Integer> colId;
     @FXML private TableColumn<Category, String> colName;
-    @FXML private TableColumn<Category, String> colStatus;
+    @FXML private TableColumn<Category, String> colType; 
     @FXML private Button btnSave, btnUpdate, btnDelete;
 
     private CategoryDAO dao = new CategoryDAO();
@@ -22,22 +21,19 @@ public class MasterCategoryController {
 
     @FXML
     public void initialize() {
-        // Isi pilihan ComboBox
-        cbStatus.setItems(FXCollections.observableArrayList("active", "inactive"));
+        tableCategory.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         
-        // Setup Kolom Tabel
-        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        cbType.setItems(FXCollections.observableArrayList("ASET", "ATK"));
+        colId.setCellValueFactory(new PropertyValueFactory<>("categoryId")); 
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+        colType.setCellValueFactory(new PropertyValueFactory<>("type")); 
 
         loadData();
-
-        // Event Klik Tabel
         tableCategory.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
-                selectedId = newVal.getId();
+                selectedId = newVal.getCategoryId(); 
                 txtCategoryName.setText(newVal.getName());
-                cbStatus.setValue(newVal.getStatus());
+                cbType.setValue(newVal.getType());  
                 
                 btnSave.setDisable(true);
                 btnUpdate.setDisable(false);
@@ -52,55 +48,48 @@ public class MasterCategoryController {
 
     @FXML
     private void handleSave() {
-        
-        // Cek Nama Kategori
         if (txtCategoryName.getText() == null || txtCategoryName.getText().trim().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Nama Kategori tidak boleh kosong!");
-            alert.setTitle("Peringatan");
-            alert.showAndWait();
+            showAlert(Alert.AlertType.WARNING, "Peringatan", "Nama Kategori tidak boleh kosong!");
             txtCategoryName.requestFocus(); 
             return; 
         }
 
-        
-        if (cbStatus.getValue() == null || cbStatus.getValue().toString().trim().isEmpty() || cbStatus.getValue().toString().equals("Pilih Status")) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Status Kategori wajib dipilih!");
-            alert.setTitle("Peringatan");
-            alert.showAndWait();
-            cbStatus.requestFocus();
+        if (cbType.getValue() == null || cbType.getValue().trim().isEmpty() || cbType.getValue().equals("Pilih Tipe")) {
+            showAlert(Alert.AlertType.WARNING, "Peringatan", "Tipe Kategori (ASET/ATK) wajib dipilih!");
+            cbType.requestFocus();
             return; 
         }
 
-       
-        
         Category cat = new Category();
         cat.setName(txtCategoryName.getText());
-        cat.setStatus(cbStatus.getValue().toString()); 
+        cat.setType(cbType.getValue()); 
         
         if (dao.insert(cat)) {
-            
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Data Kategori berhasil disimpan!");
-            alert.setTitle("Sukses");
-            alert.showAndWait();
-            
+            showAlert(Alert.AlertType.INFORMATION, "Sukses", "Data Kategori berhasil disimpan!");
             handleClear(); 
-             
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Gagal menyimpan data ke database!");
-            alert.setTitle("Error");
-            alert.showAndWait();
+            showAlert(Alert.AlertType.ERROR, "Error", "Gagal menyimpan data ke database!");
         }
     }
 
     @FXML
     private void handleUpdate() {
         if (selectedId != 0) {
+            if (txtCategoryName.getText().trim().isEmpty() || cbType.getValue() == null) {
+                showAlert(Alert.AlertType.WARNING, "Peringatan", "Semua kolom form wajib diisi!");
+                return;
+            }
+
             Category cat = new Category();
-            cat.setId(selectedId);
+            cat.setCategoryId(selectedId); 
             cat.setName(txtCategoryName.getText());
-            cat.setStatus(cbStatus.getValue());
+            cat.setType(cbType.getValue());
+            
             if (dao.update(cat)) {
+                showAlert(Alert.AlertType.INFORMATION, "Sukses", "Data Kategori berhasil diubah!");
                 handleClear();
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Error", "Gagal mengubah data!");
             }
         }
     }
@@ -108,11 +97,17 @@ public class MasterCategoryController {
     @FXML
     private void handleDelete() {
         if (selectedId != 0) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Hapus kategori ini?", ButtonType.YES, ButtonType.NO);
-            alert.showAndWait();
-            if (alert.getResult() == ButtonType.YES) {
+            Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION, "Hapus kategori ini?", ButtonType.YES, ButtonType.NO);
+            confirmAlert.setTitle("Konfirmasi Hapus");
+            confirmAlert.setHeaderText(null);
+            confirmAlert.showAndWait();
+            
+            if (confirmAlert.getResult() == ButtonType.YES) {
                 if (dao.delete(selectedId)) {
+                    showAlert(Alert.AlertType.INFORMATION, "Sukses", "Kategori berhasil dihapus (Soft Delete).");
                     handleClear();
+                } else {
+                    showAlert(Alert.AlertType.ERROR, "Error", "Gagal menghapus data!");
                 }
             }
         }
@@ -122,11 +117,19 @@ public class MasterCategoryController {
     private void handleClear() {
         selectedId = 0;
         txtCategoryName.clear();
-        cbStatus.getSelectionModel().clearSelection();
+        cbType.getSelectionModel().clearSelection(); 
         btnSave.setDisable(false);
         btnUpdate.setDisable(true);
         btnDelete.setDisable(true);
         tableCategory.getSelectionModel().clearSelection();
         loadData();
+    }
+
+    private void showAlert(Alert.AlertType type, String title, String content) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }

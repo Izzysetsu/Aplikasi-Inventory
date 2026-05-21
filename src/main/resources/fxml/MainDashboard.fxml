@@ -3,41 +3,82 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="700.0" prefWidth="1100.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.inventory.controller.MainDashboardController">
     
-    <!-- Bagian Kiri: Sidebar -->
     <left>
         <VBox fx:id="sidebar" prefWidth="250.0" style="-fx-background-color: #1e1b18;">
-            
-            <!-- Logo Kuning Atas -->
-            <HBox fx:id="brandArea" alignment="CENTER" prefHeight="60.0" style="-fx-background-color: #f1c40f;">
-                <Label fx:id="brandText" style="-fx-text-fill: #2c3e50; -fx-font-size: 18px; -fx-font-weight: bold;" text="INVENTORY MANAGEMENT" />
-            </HBox>
-            
-            <!-- Menu Item -->
-            <!-- Menu Item -->
-            <VBox fx:id="menuContainer" spacing="5.0" style="-fx-padding: 15 0 0 0;">
-                <Label fx:id="lblMenu" style="-fx-text-fill: #e67e22; -fx-font-size: 11px; -fx-font-weight: bold; -fx-padding: 0 0 5 20;" text="MASTER" />
-                
-                <Button fx:id="btnCategory" maxWidth="Infinity" onAction="#showCategory" styleClass="sidebar-btn" text="📦  Data Kategori" />
-                <Button fx:id="btnSupplier" maxWidth="Infinity" onAction="#showSupplier" styleClass="sidebar-btn" text="🚚  Data Supplier" />
-                <Button fx:id="btnAsset" maxWidth="Infinity" onAction="#showAsset" styleClass="sidebar-btn" text="🖥️  Data Asset" />
-                <Separator style="-fx-padding: 10 20;" />
-                <Label fx:id="lblTrx" style="-fx-text-fill: #e67e22; -fx-font-size: 11px; -fx-font-weight: bold; -fx-padding: 0 0 5 20;" text="TRANSAKSI" />
-                
-                <!-- FLOWCHART PEMINJAMAN -->
-                <Button fx:id="btnLoan" maxWidth="Infinity" onAction="#showLoan" styleClass="sidebar-btn" text="🤝  Peminjaman" />
-                <Button fx:id="btnReportLoan" maxWidth="Infinity" onAction="#showReportLoan" styleClass="sidebar-btn" text="📊  Laporan Peminjaman" />
-                
-            </VBox>
+            <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: #1e1b18;" hbarPolicy="NEVER" VBox.vgrow="ALWAYS">
+                <VBox>
+                    <HBox fx:id="brandArea" alignment="CENTER" prefHeight="60.0" style="-fx-background-color: #f1c40f;">
+                        <Label fx:id="brandText" style="-fx-text-fill: #2c3e50; -fx-font-size: 18px; -fx-font-weight: bold;" text="INVENTORY MANAGEMENT" />
+                    </HBox>
+                    
+                    <VBox fx:id="menuContainer" spacing="5.0" style="-fx-padding: 15 0 0 0;">
+                        <!-- INVENTORY / UTAMA -->
+                        <Label fx:id="lblInventory" style="-fx-text-fill: #e67e22; -fx-font-size: 11px; -fx-font-weight: bold; -fx-padding: 0 0 5 20;" text="INVENTORY / UTAMA" />
+                        <Button fx:id="btnCategory" maxWidth="Infinity" onAction="#showCategory" styleClass="sidebar-btn" text="📦  Data Kategori" />
+                        <Button fx:id="btnSupplier" maxWidth="Infinity" onAction="#showSupplier" styleClass="sidebar-btn" text="🚚  Data Supplier" />
+                        <Button fx:id="btnAsset" maxWidth="Infinity" onAction="#showAsset" styleClass="sidebar-btn" text="📦  Data Barang Masuk" />
+                        <Button fx:id="btnLoan" maxWidth="Infinity" onAction="#showLoan" styleClass="sidebar-btn" text="📤  Data Barang Keluar" />
+                        <Button fx:id="btnReportAsset" maxWidth="Infinity" onAction="#showReportAsset" styleClass="sidebar-btn" text="📊  Laporan Barang" />
+                        <Button fx:id="btnStockOpname" maxWidth="Infinity" onAction="#showStockOpname" styleClass="sidebar-btn" text="📋  Stock Opname" />
+                        
+                        <Separator style="-fx-padding: 10 20;" />
+                        
+                        <!-- PEMINJAMAN DROPDOWN -->
+                        <Button fx:id="btnPeminjamanManage" maxWidth="Infinity" onAction="#togglePeminjamanMenu" styleClass="sidebar-btn" text="🤝  Peminjaman ▼" />
+                        <VBox fx:id="peminjamanSubMenu" managed="false" visible="false" style="-fx-background-color: #110f0d; -fx-padding: 0 0 0 15;">
+                            <Button fx:id="btnReqBarang" maxWidth="Infinity" onAction="#showReqBarang" styleClass="sidebar-btn" text="📝  Request Barang" />
+                            <Button fx:id="btnListPeminjaman" maxWidth="Infinity" onAction="#showListPeminjaman" styleClass="sidebar-btn" text="📋  List Peminjaman" />
+                            <Button fx:id="btnReportLoan" maxWidth="Infinity" onAction="#showReportLoan" styleClass="sidebar-btn" text="📊  Laporan Peminjaman" />
+                        </VBox>
+                        
+                        <Separator style="-fx-padding: 10 20;" />
+
+                        <!-- RUANGAN MEETING DROPDOWN -->
+                        <Button fx:id="btnMeetingManage" maxWidth="Infinity" onAction="#toggleMeetingMenu" styleClass="sidebar-btn" text="🏛️  Ruangan Meeting ▼" />
+                        <VBox fx:id="meetingSubMenu" managed="false" visible="false" style="-fx-background-color: #110f0d; -fx-padding: 0 0 0 15;">
+                            <Button fx:id="btnMasterRoom" maxWidth="Infinity" onAction="#showMasterRoom" styleClass="sidebar-btn" text="🏢  Data Ruangan" />
+                            <Button fx:id="btnRequestRoom" maxWidth="Infinity" onAction="#showRequestRoom" styleClass="sidebar-btn" text="📝  Request Ruangan" />
+                            <Button fx:id="btnListRoomBooking" maxWidth="Infinity" onAction="#showListRoomBooking" styleClass="sidebar-btn" text="📋  List Peminjaman" />
+                            <Button fx:id="btnReportRoomBooking" maxWidth="Infinity" onAction="#showReportRoomBooking" styleClass="sidebar-btn" text="📊  Laporan Peminjaman" />
+                        </VBox>
+
+                        <Separator style="-fx-padding: 10 20;" />
+                        
+                        <!-- MASTER -->
+                        <Label fx:id="lblMaster" style="-fx-text-fill: #e67e22; -fx-font-size: 11px; -fx-font-weight: bold; -fx-padding: 0 0 5 20;" text="MASTER" />
+                        <Button fx:id="btnLocation" maxWidth="Infinity" onAction="#showLocation" styleClass="sidebar-btn" text="🏢  Data Lokasi" />
+                        <Button fx:id="btnStatus" maxWidth="Infinity" onAction="#showStatus" styleClass="sidebar-btn" text="🏷️  Data Status" />
+                        <Button fx:id="btnPermission" maxWidth="Infinity" onAction="#showPermission" styleClass="sidebar-btn" text="🔐  Permission" />
+                        
+                        <!-- MANAJEMEN USER DROPDOWN -->
+                        <Button fx:id="btnUserManage" maxWidth="Infinity" onAction="#toggleUserMenu" styleClass="sidebar-btn" text="👥  Manajemen User ▼" />
+                        <VBox fx:id="userSubMenu" managed="false" visible="false" style="-fx-background-color: #110f0d; -fx-padding: 0 0 0 15;">
+                            <Button fx:id="btnListUser" maxWidth="Infinity" onAction="#showListUser" styleClass="sidebar-btn" text="📝  List User" />
+                            <Button fx:id="btnRegisterUser" maxWidth="Infinity" onAction="#showRegisterUser" styleClass="sidebar-btn" text="➕  Register User" />
+                            <Button fx:id="btnLogUser" maxWidth="Infinity" onAction="#showLogUser" styleClass="sidebar-btn" text="🕒  Log User" />
+                        </VBox>
+                        
+                        <Button fx:id="btnChangePassword" maxWidth="Infinity" onAction="#showChangePassword" styleClass="sidebar-btn" text="🔑  Ubah Password" />
+                        
+                        <Separator style="-fx-padding: 10 20;" />
+                        
+                        <Button fx:id="btnLogout" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleLogout" prefHeight="45.0" style="-fx-background-color: transparent; -fx-text-fill: #ef4444; -fx-alignment: BASELINE_LEFT; -fx-cursor: hand; -fx-padding: 0 0 15 20;" text="🚪  Logout">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                    </VBox>
+                </VBox>
+            </ScrollPane>
         </VBox>
     </left>
 
-    <!-- Bagian Kanan: Navbar Atas & Konten -->
     <center>
         <BorderPane>
-            <!-- Navbar Atas -->
             <top>
                 <HBox alignment="CENTER_LEFT" prefHeight="60.0" style="-fx-background-color: white; -fx-border-color: #e0e0e0; -fx-border-width: 0 0 1 0; -fx-padding: 0 15;">
                     <Button onAction="#toggleSidebar" style="-fx-background-color: transparent; -fx-font-size: 20px; -fx-cursor: hand;" text="☰" />
@@ -45,7 +86,6 @@
                 </HBox>
             </top>
             
-            <!-- Area Konten Form -->
             <center>
                 <StackPane fx:id="contentArea" style="-fx-background-color: #f4f6f9; -fx-padding: 20;">
                     <Label style="-fx-font-size: 24px; -fx-text-fill: #7f8c8d;" text="Selamat Datang di Sistem Inventory" />
